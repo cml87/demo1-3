@@ -1,20 +1,22 @@
 pipeline {
-   agent any
-   
-   environment {
-       DEMO='1.3'
-   }
-
-   stages {
-      stage('stage-1') {
-         steps {
-            echo "This is build number $BUILD_NUMBER of demo $DEMO"
-            sh '''
-               echo "Using a multi-line shell step"
-               chmod +x test.sh
-               ./test.sh
-            '''
-         }
+  agent any
+  
+  environment {
+        NAME='Pepe'
+        VERSION = '1'
+  }
+  
+  stages {
+    stage('stage1') {
+      steps {
+        
+        // Variables inside a single quoted string don't get expanded eg
+        echo 'This is the $BUILD_NUMBER of demo $DEMO'
+        // In BlueOcean, insert the echo command through a Shell Script step
+        echo "This is the $BUILD_NUMBER of demo $DEMO"
       }
-   }
+    }
+
+  }
+
 }
